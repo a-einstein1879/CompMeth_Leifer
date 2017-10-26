@@ -1,7 +1,9 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-class Table{
+#include "cell.h"
+
+class Table {
 public:
     Table();
     ~Table();
@@ -14,7 +16,7 @@ private:
     void readConfig();
     void setupAdjacency();
     int phaseSpaceDimensionality;
-//    Variable **variable;
+    Variable **variable;
     
     // Oscillators
 //    Oscillator *oscillators;
