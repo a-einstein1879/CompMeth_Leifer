@@ -15,8 +15,13 @@ private:
     int modelingTime;
     void readConfig();
     void setupAdjacency();
+    
+    // Variable
     int phaseSpaceDimensionality;
-    Variable **variable;
+    Variable **timeSeries; // Size numberOfCells x modelingTime
+    void createTimeSeries();
+    void deleteTimeSeries();
+    
     
     // Oscillators
 //    Oscillator *oscillators;
