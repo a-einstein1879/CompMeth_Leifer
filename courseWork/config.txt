@@ -1,4 +1,4 @@
-numberOfCells	10
-cellType	1 // 1 - oscillator, 2 - neuron
-modelingTime	10
-phaseSpaceDimensionality	2
+numberOfCells	2	// number of cells
+cellType	1	// 1 - oscillator, 2 - neuron
+modelingTime	10	// time period of modeling
+phaseSpaceDimensionality	2	// amount of variables for each cell
