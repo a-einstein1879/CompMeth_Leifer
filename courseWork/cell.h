@@ -2,7 +2,6 @@
 #define CELL_H
 
 #include "variable.h"
-#include <iostream>
 
 class Cell {
 public:
@@ -21,7 +20,7 @@ protected:
     void deleteConnections();
     
     Variable variable;
-    virtual Variable solveEquation() {printf("Function in cell working\n");};
+    virtual Variable solveEquation() {}
 };
 
 #endif
