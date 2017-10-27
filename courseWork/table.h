@@ -26,6 +26,8 @@ private:
     // Function which creates oscillators/neurons
     void createCells();
     void deleteCells();
+    Cell *getCellById(int id);
+    
     // Oscillators
     Oscillator *oscillators;
     void createOscillators();

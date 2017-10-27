@@ -20,7 +20,7 @@ protected:
     void deleteConnections();
     
     Variable variable;
-    virtual Variable solveEquation() = 0;
+    virtual Variable solveEquation() {return 0;};
 };
 
 #endif

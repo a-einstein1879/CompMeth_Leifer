@@ -4,9 +4,9 @@
 
 Table::Table() {
     readConfig();
+    createCells();
     setupAdjacency();
     createTimeSeries();
-    createCells();
 }
 
 Table::~Table() {
@@ -65,8 +65,16 @@ void Table::setupAdjacency() {
     // Skipping header
     std::getline(adjacency, line, '\n');
     
-    while(std::getline(adjacency, line, '\n')) {
-        std::cout << line << std::endl;
+    int source, dest;
+    double weight;
+    while(1) {
+        std::getline(adjacency, line, '\t');
+        source = std::stoi(line);
+        std::getline(adjacency, line, '\t');
+        dest = std::stoi(line);
+        if(!std::getline(adjacency, line, '\n')) {break;}
+        weight = std::stoi(line);
+        getCellById(dest)->addConnection(getCellById(source), weight);
     }
     
     adjacency.close();
@@ -99,10 +107,19 @@ void Table::createCells() {
         createOscillators();
     }
 }
+
 void Table::deleteCells() {
     if(cellType == 1) {
         deleteOscillators();
     }
+}
+
+Cell* Table::getCellById(int id) {
+    if(cellType == 1) {
+        return oscillators + id;
+    }
+    std::cout << "Wrong scenario" << std::endl;
+    return 0;
 }
 
 void Table::createOscillators() {

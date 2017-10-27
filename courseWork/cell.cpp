@@ -2,7 +2,7 @@
 #include <iostream>
 
 Cell::Cell() {
-    std::cout << "New cell created" << std::endl;
+    std::cout << "New cell " << this << " created" << std::endl;
     numberOfConnections = 0;
     variable.setPhaseSpaceDimensionality(2);
 }
@@ -14,7 +14,9 @@ Cell::~Cell() {
 
 Variable Cell::tick() {
 //    variable = solveEquation();
-    return variable;
+    std::cout << "Tick" << std::endl;
+    //return variable;
+    return 0;
 }
 
 void Cell::setPhaseSpaceDimensionality(int pphaseSpaceDimensionality) {
@@ -37,12 +39,15 @@ void Cell::addConnection(Cell *source, double weight) {
             connections[i].weight = tmpConnections[i].weight;
         }
         delete [] tmpConnections;
+        
+        connections[numberOfConnections - 1].source = source;
+        connections[numberOfConnections - 1].weight = weight;
     } else {
         connections = new Connection[++numberOfConnections];
         connections[0].source = source;
         connections[0].weight = weight;
     }
-    std::cout << "Added new connection. Now it there are " << numberOfConnections << " connections" << std::endl;
+    std::cout << "Added new connection. Now there are " << numberOfConnections << " connections" << std::endl;
     for(int i = 0; i < numberOfConnections; i++) {
         std::cout << this << ": Source is " << connections[i].source << " weight is " << connections[i].weight << std::endl;
     }
