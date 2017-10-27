@@ -6,9 +6,7 @@ Table::Table() {
     readConfig();
     setupAdjacency();
     createTimeSeries();
-    Cell cell1, cell2;
-    cell1.addConnection(&cell2, 2);
-    cell2.addConnection(&cell1, -2);
+    Oscillator osc1(2), osc2(2);
 }
 
 Table::~Table() {

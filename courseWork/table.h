@@ -1,7 +1,8 @@
 #ifndef TABLE_H
 #define TABLE_H
 
-#include "cell.h"
+#include "oscillator.h"
+#include "neuron.h"
 
 class Table {
 public:
@@ -24,7 +25,7 @@ private:
     
     
     // Oscillators
-//    Oscillator *oscillators;
+    Oscillator *oscillators;
     void createOscillators();
     void deleteOscillators();
     
