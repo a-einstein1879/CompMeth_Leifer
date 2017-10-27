@@ -5,6 +5,9 @@
 Table::Table() {
     readConfig();
     createTimeSeries();
+    Cell cell1, cell2;
+    cell1.addConnection(&cell2, 2);
+    cell2.addConnection(&cell1, -2);
 }
 
 Table::~Table() {
