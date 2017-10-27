@@ -4,6 +4,7 @@
 
 Table::Table() {
     readConfig();
+    setupAdjacency();
     createTimeSeries();
     Cell cell1, cell2;
     cell1.addConnection(&cell2, 2);
@@ -40,7 +41,7 @@ void Table::readConfig() {
     modelingTime = std::stoi(line);
     std::getline(config, line, '\n');
     
-    // reading modeling time
+    // reading phase space dimensionality
     std::getline(config, line, '\t');
     std::getline(config, line, '\t');
     phaseSpaceDimensionality = std::stoi(line);
@@ -57,6 +58,19 @@ void Table::readConfig() {
 }
 
 void Table::setupAdjacency() {
+    std::cout << "Adjacency file read" << std::endl;
+    
+    std::string line;
+    std::ifstream adjacency;
+    adjacency.open("adjacency.txt", std::ifstream::in);
+    // Skipping header
+    std::getline(adjacency, line, '\n');
+    
+    while(std::getline(adjacency, line, '\n')) {
+        std::cout << line << std::endl;
+    }
+    
+    adjacency.close();
 }
 
 void Table::createTimeSeries(){
