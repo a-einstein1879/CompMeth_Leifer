@@ -7,6 +7,7 @@ Table::Table() {
     createCells();
     setupAdjacency();
     createTimeSeries();
+    time = 0;
 }
 
 Table::~Table() {
@@ -14,7 +15,7 @@ Table::~Table() {
     deleteTimeSeries();
 }
 
-void Table::tick() {
+bool Table::tick() {
 }
 
 void Table::readConfig() {

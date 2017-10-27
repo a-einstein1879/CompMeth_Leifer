@@ -4,7 +4,6 @@
 Cell::Cell() {
     std::cout << "New cell " << this << " created" << std::endl;
     numberOfConnections = 0;
-    variable.setPhaseSpaceDimensionality(2);
 }
 
 Cell::~Cell() {
@@ -22,6 +21,7 @@ Variable Cell::tick() {
 void Cell::setPhaseSpaceDimensionality(int pphaseSpaceDimensionality) {
     phaseSpaceDimensionality = pphaseSpaceDimensionality;
     variable.setPhaseSpaceDimensionality(phaseSpaceDimensionality);
+    std::cout << "Cell " << this << " phase space dimensionality is set to " << phaseSpaceDimensionality << std::endl;
 }
 
 void Cell::addConnection(Cell *source, double weight) {

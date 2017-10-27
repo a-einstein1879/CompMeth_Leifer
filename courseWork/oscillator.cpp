@@ -1,6 +1,6 @@
 #include "oscillator.h"
 
-Oscillator::Oscillator(){
+Oscillator::Oscillator() {
 }
 
 Oscillator::Oscillator(int pphaseSpaceDimensionality) {

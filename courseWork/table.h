@@ -8,7 +8,7 @@ class Table {
 public:
     Table();
     ~Table();
-    void tick();
+    bool tick();
 private:
     int cellType;
     int numberOfCells;

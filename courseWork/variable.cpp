@@ -9,6 +9,8 @@ void Variable::setPhaseSpaceDimensionality(int phaseSpaceDimensionality){
 
 Variable::Variable(int phaseSpaceDimensionality) {
     x = new double[phaseSpaceDimensionality];
+    for(int i = 0; i < phaseSpaceDimensionality; i++)
+        setVariable(i, 0);
 }
 
 Variable::~Variable() {
