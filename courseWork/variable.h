@@ -4,6 +4,7 @@
 class Variable {
 public:
     Variable();
+    int phaseSpaceDimensionality;
     /* Following function is designed to be used in case you need an array of this objects */
     void setPhaseSpaceDimensionality(int phaseSpaceDimensionality);
     Variable(int phaseSpaceDimensionality);

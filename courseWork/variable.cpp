@@ -1,6 +1,7 @@
 #include "variable.h"
 
 Variable::Variable() {
+    phaseSpaceDimensionality = 0;
 }
 
 void Variable::setPhaseSpaceDimensionality(int phaseSpaceDimensionality){
@@ -14,7 +15,8 @@ Variable::Variable(int phaseSpaceDimensionality) {
 }
 
 Variable::~Variable() {
-    delete[] x;
+    if(phaseSpaceDimensionality == 0) {return;}
+    delete [] x;
 }
 
 double Variable::getVariable(int dim) {
