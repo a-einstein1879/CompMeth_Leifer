@@ -106,7 +106,7 @@ void Table::deleteCells() {
 }
 
 void Table::createOscillators() {
-    std::cout << "Creating oscillators" << std::endl;
+    std::cout << "Creating " << numberOfCells << " oscillators" << std::endl;
     oscillators = new Oscillator[numberOfCells];
     for(int i = 0; i < numberOfCells; i++) {
         oscillators[i].setPhaseSpaceDimensionality(phaseSpaceDimensionality);
