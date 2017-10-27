@@ -8,7 +8,8 @@ void Variable::setPhaseSpaceDimensionality(int phaseSpaceDimensionality){
     x = new double[phaseSpaceDimensionality];
 }
 
-Variable::Variable(int phaseSpaceDimensionality) {
+Variable::Variable(int pphaseSpaceDimensionality) {
+    phaseSpaceDimensionality = pphaseSpaceDimensionality;
     x = new double[phaseSpaceDimensionality];
     for(int i = 0; i < phaseSpaceDimensionality; i++)
         setVariable(i, 0);
