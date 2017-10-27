@@ -5,7 +5,8 @@
 
 class Oscillator : public Cell {
 public:
-    Oscillator(int pphaseSpaceDimensionality = 2);
+    Oscillator();
+    Oscillator(int pphaseSpaceDimensionality);
 private:
     Variable solveEquation();
     double getConnectionContribution();

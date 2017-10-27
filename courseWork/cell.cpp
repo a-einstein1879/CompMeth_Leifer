@@ -17,6 +17,11 @@ Variable Cell::tick() {
     return variable;
 }
 
+void Cell::setPhaseSpaceDimensionality(int pphaseSpaceDimensionality) {
+    phaseSpaceDimensionality = pphaseSpaceDimensionality;
+    variable.setPhaseSpaceDimensionality(phaseSpaceDimensionality);
+}
+
 void Cell::addConnection(Cell *source, double weight) {
     if(numberOfConnections != 0) {
         Connection *tmpConnections = new Connection[numberOfConnections];

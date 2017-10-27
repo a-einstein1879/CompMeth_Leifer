@@ -9,7 +9,9 @@ public:
     ~Cell();
     Variable tick();
     void addConnection(Cell *source, double weight);
+    void setPhaseSpaceDimensionality(int pphaseSpaceDimensionality);
 protected:
+    int phaseSpaceDimensionality;
     int numberOfConnections;
     struct Connection {
         Cell *source;

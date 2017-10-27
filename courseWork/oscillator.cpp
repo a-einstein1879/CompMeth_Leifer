@@ -1,12 +1,14 @@
 #include "oscillator.h"
 
+Oscillator::Oscillator(){
+}
 
 Oscillator::Oscillator(int pphaseSpaceDimensionality) {
-    variable.setPhaseSpaceDimensionality(pphaseSpaceDimensionality);
+    setPhaseSpaceDimensionality(pphaseSpaceDimensionality);
 }
 
 Variable Oscillator::solveEquation() {
-    Variable var(2);
+    Variable var(phaseSpaceDimensionality);
     var.setVariable(1, 13);
     return var;
 }
