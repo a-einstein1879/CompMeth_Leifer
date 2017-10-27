@@ -23,7 +23,9 @@ private:
     void createTimeSeries();
     void deleteTimeSeries();
     
-    
+    // Function which creates oscillators/neurons
+    void createCells();
+    void deleteCells();
     // Oscillators
     Oscillator *oscillators;
     void createOscillators();

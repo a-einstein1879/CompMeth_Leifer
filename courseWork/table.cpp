@@ -6,10 +6,11 @@ Table::Table() {
     readConfig();
     setupAdjacency();
     createTimeSeries();
-    Oscillator osc1(2), osc2(2);
+    createCells();
 }
 
 Table::~Table() {
+    deleteCells();
     deleteTimeSeries();
 }
 
@@ -93,8 +94,26 @@ void Table::deleteTimeSeries(){
     std::cout << "Time series in Table deleted" << std::endl;
 }
 
+void Table::createCells() {
+    if(cellType == 1) {
+        createOscillators();
+    }
+}
+void Table::deleteCells() {
+    if(cellType == 1) {
+        deleteOscillators();
+    }
+}
+
 void Table::createOscillators() {
+    std::cout << "Creating oscillators" << std::endl;
+    oscillators = new Oscillator[numberOfCells];
+    for(int i = 0; i < numberOfCells; i++) {
+        oscillators[i].setPhaseSpaceDimensionality(phaseSpaceDimensionality);
+    }
 }
 
 void Table::deleteOscillators() {
+    std::cout << "Deleting oscillators" << std::endl;
+    delete [] oscillators;
 }
