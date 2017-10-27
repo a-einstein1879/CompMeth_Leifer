@@ -21,9 +21,9 @@ Variable::~Variable() {
 }
 
 double Variable::getVariable(int dim) {
-    return x[dim - 1];
+    return x[dim];
 }
 
 void Variable::setVariable(int dim, double value) {
-    x[dim - 1] = value;
+    x[dim] = value;
 }

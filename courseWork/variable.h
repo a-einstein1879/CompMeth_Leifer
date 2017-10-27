@@ -10,7 +10,6 @@ public:
     Variable(int pphaseSpaceDimensionality);
     ~Variable();
     
-    /* We count dimensions from 1 here for user-friendliness */
     double getVariable(int dim);
     void setVariable(int dim, double value);
 private:
