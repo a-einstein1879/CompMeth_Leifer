@@ -12,9 +12,11 @@ Cell::~Cell() {
 }
 
 Variable Cell::tick() {
-//    variable = solveEquation();
+    std::cout << "Variable = (" << variable.getVariable(0) << ", " << variable.getVariable(1) << ")" << std::endl;
+    variable = solveEquation();
     std::cout << "Tick" << std::endl;
-    //return variable;
+    std::cout << "Variable = (" << variable.getVariable(0) << ", " << variable.getVariable(1) << ")" << std::endl;
+//    return variable;
     return 0;
 }
 

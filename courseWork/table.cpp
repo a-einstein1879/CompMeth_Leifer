@@ -16,6 +16,7 @@ Table::~Table() {
 }
 
 bool Table::tick() {
+    getCellById(0)->tick();
 }
 
 void Table::readConfig() {
