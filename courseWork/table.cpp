@@ -7,14 +7,15 @@ Table::Table() {
     createCells();
     setupAdjacency();
     createTimeSeries();
+    time = 0;
 }
 
 Table::~Table() {
-    deleteCells();
-    deleteTimeSeries();
 }
 
-void Table::tick() {
+bool Table::tick() {
+    Variable var(2);
+    var = getCellById(0)->tick();
 }
 
 void Table::readConfig() {
@@ -83,23 +84,26 @@ void Table::setupAdjacency() {
 void Table::createTimeSeries(){
     if(numberOfCells == 0 || modelingTime == 0) {return;}
     
-    timeSeries = new Variable*[numberOfCells];
+//                for(int i = 0; i < numberOfNodes; i++)
+//                        vectors[i].resize(numberOfColors * numberOfWeights);
+
+    timeSeries.resize(numberOfCells);
+    for(int i = 0; i < numberOfCells; i++) {
+        timeSeries[i].reserve(modelingTime);
+	for(int j = 0; j < modelingTime; j++) {
+            timeSeries[i].push_back(Variable(phaseSpaceDimensionality));
+        }
+    }
+
+  /*  timeSeries = new Variable*[numberOfCells];
     for(int i = 0; i < numberOfCells; i++) {
         timeSeries[i] = new Variable[modelingTime];
     }
     for(int i = 0; i < numberOfCells; i++)
         for(int j = 0; j < modelingTime; j++)
             timeSeries[i][j].setPhaseSpaceDimensionality(phaseSpaceDimensionality);
-    
+    */
     std::cout << "Time series of size " << numberOfCells << " x " << modelingTime << " in Table created" << std::endl;
-}
-
-void Table::deleteTimeSeries(){
-    if(numberOfCells == 0 || modelingTime == 0) {return;}
-    
-    delete [] timeSeries;
-    
-    std::cout << "Time series in Table deleted" << std::endl;
 }
 
 void Table::createCells() {
@@ -108,15 +112,9 @@ void Table::createCells() {
     }
 }
 
-void Table::deleteCells() {
-    if(cellType == 1) {
-        deleteOscillators();
-    }
-}
-
 Cell* Table::getCellById(int id) {
     if(cellType == 1) {
-        return oscillators + id;
+        return &oscillators[id];
     }
     std::cout << "Wrong scenario" << std::endl;
     return 0;
@@ -124,13 +122,8 @@ Cell* Table::getCellById(int id) {
 
 void Table::createOscillators() {
     std::cout << "Creating " << numberOfCells << " oscillators" << std::endl;
-    oscillators = new Oscillator[numberOfCells];
+    oscillators.reserve(numberOfCells);
     for(int i = 0; i < numberOfCells; i++) {
-        oscillators[i].setPhaseSpaceDimensionality(phaseSpaceDimensionality);
+        oscillators.push_back(Oscillator(phaseSpaceDimensionality));
     }
-}
-
-void Table::deleteOscillators() {
-    std::cout << "Deleting oscillators" << std::endl;
-    delete [] oscillators;
 }

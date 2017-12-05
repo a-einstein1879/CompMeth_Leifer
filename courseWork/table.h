@@ -3,12 +3,13 @@
 
 #include "oscillator.h"
 #include "neuron.h"
+#include <vector>
 
 class Table {
 public:
     Table();
     ~Table();
-    void tick();
+    bool tick();
 private:
     int cellType;
     int numberOfCells;
@@ -19,19 +20,18 @@ private:
     
     // Variable
     int phaseSpaceDimensionality;
-    Variable **timeSeries; // Size numberOfCells x modelingTime
+    std::vector< std::vector<Variable> > timeSeries;
+//    Variable **timeSeries; // Size numberOfCells x modelingTime
     void createTimeSeries();
     void deleteTimeSeries();
     
     // Function which creates oscillators/neurons
     void createCells();
-    void deleteCells();
     Cell *getCellById(int id);
     
     // Oscillators
-    Oscillator *oscillators;
+    std::vector<Oscillator> oscillators;
     void createOscillators();
-    void deleteOscillators();
     
     // Neurons
 };

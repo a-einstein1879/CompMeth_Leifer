@@ -16,11 +16,11 @@ protected:
     struct Connection {
         Cell *source;
         double weight;
-    } *connections;
-    void deleteConnections();
+    };
+    std::vector<Connection> connections;
     
     Variable variable;
-    virtual Variable solveEquation() {return 0;};
+    virtual Variable solveEquation() {}
 };
 
 #endif
