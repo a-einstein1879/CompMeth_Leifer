@@ -6,15 +6,8 @@ Cell::Cell() {
     numberOfConnections = 0;
 }
 
-Cell::~Cell() {
-    std::cout << "Cell is deleted" << std::endl;
-}
-
 Variable Cell::tick() {
-    std::cout << "Variable = (" << variable.getVariable(0) << ", " << variable.getVariable(1) << ")" << std::endl;
     variable = solveEquation();
-    std::cout << "Tick" << std::endl;
-    std::cout << "Variable = (" << variable.getVariable(0) << ", " << variable.getVariable(1) << ")" << std::endl;
     return variable;
 }
 

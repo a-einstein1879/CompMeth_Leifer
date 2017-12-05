@@ -6,7 +6,6 @@
 class Cell {
 public:
     Cell();
-    ~Cell();
     Variable tick();
     void addConnection(Cell *source, double weight);
     void setPhaseSpaceDimensionality(int pphaseSpaceDimensionality);

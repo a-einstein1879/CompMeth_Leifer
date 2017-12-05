@@ -21,9 +21,7 @@ private:
     // Variable
     int phaseSpaceDimensionality;
     std::vector< std::vector<Variable> > timeSeries;
-//    Variable **timeSeries; // Size numberOfCells x modelingTime
     void createTimeSeries();
-    void deleteTimeSeries();
     
     // Function which creates oscillators/neurons
     void createCells();

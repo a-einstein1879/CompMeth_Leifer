@@ -3,6 +3,6 @@
 
 int main(){
     Table table;
-    table.tick();
+    while(table.tick()) {}
     return 0;
 }

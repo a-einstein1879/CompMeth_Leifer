@@ -6,16 +6,31 @@ Table::Table() {
     readConfig();
     createCells();
     setupAdjacency();
-    createTimeSeries();
+    timeSeries.resize(numberOfCells);
     time = 0;
 }
 
 Table::~Table() {
+    for(int i = 0; i < numberOfCells; i++) {
+        for(int j = 0; j < modelingTime; j++) {
+            std::cout << "Time series(cell = " << i << ", time = " << j << ") = (";
+            for(int k = 0; k < phaseSpaceDimensionality; k++) {
+                std::cout << timeSeries[i][j].getVariable(k) << ", ";
+            }
+            std::cout << ")\t";
+        }
+	std::cout << "\n";
+    }
 }
 
 bool Table::tick() {
-    Variable var(2);
-    var = getCellById(0)->tick();
+    for(int i = 0; i < numberOfCells; i++) {
+        Variable var(phaseSpaceDimensionality);
+        var = getCellById(i)->tick();
+        timeSeries[i].push_back(var);
+    }
+    if(time++ > modelingTime) {return 0;}
+    else {return 1;}
 }
 
 void Table::readConfig() {
@@ -84,9 +99,6 @@ void Table::setupAdjacency() {
 void Table::createTimeSeries(){
     if(numberOfCells == 0 || modelingTime == 0) {return;}
     
-//                for(int i = 0; i < numberOfNodes; i++)
-//                        vectors[i].resize(numberOfColors * numberOfWeights);
-
     timeSeries.resize(numberOfCells);
     for(int i = 0; i < numberOfCells; i++) {
         timeSeries[i].reserve(modelingTime);
@@ -95,14 +107,6 @@ void Table::createTimeSeries(){
         }
     }
 
-  /*  timeSeries = new Variable*[numberOfCells];
-    for(int i = 0; i < numberOfCells; i++) {
-        timeSeries[i] = new Variable[modelingTime];
-    }
-    for(int i = 0; i < numberOfCells; i++)
-        for(int j = 0; j < modelingTime; j++)
-            timeSeries[i][j].setPhaseSpaceDimensionality(phaseSpaceDimensionality);
-    */
     std::cout << "Time series of size " << numberOfCells << " x " << modelingTime << " in Table created" << std::endl;
 }
 
