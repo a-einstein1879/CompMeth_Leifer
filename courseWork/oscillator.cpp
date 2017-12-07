@@ -23,6 +23,7 @@ Variable Oscillator::solveEquation() {
     var.setVariable(0, ykp);
     var.setVariable(1, xkp);
     return var;
+//    return 0;
 }
 
 double Oscillator::getConnectionContribution() {
