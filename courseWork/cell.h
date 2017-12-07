@@ -19,7 +19,7 @@ protected:
     std::vector<Connection> connections;
     
     Variable variable;
-    virtual Variable solveEquation() {}
+    virtual Variable solveEquation() = 0;
 };
 
 #endif
