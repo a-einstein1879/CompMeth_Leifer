@@ -27,9 +27,9 @@ Variable Oscillator::solveEquation() {
 }
 
 double Oscillator::getConnectionContribution() {
-	double total = 0;
-	for(int i = 0; i < numberOfConnections; i++) {
-		total += connections[i].weight * connections[i].source->getVariable(1);
-	}
+    double total = 0;
+    for(int i = 0; i < numberOfConnections; i++) {
+        total += connections[i].weight * connections[i].source->getVariable(1);
+    }
     return total;
 }

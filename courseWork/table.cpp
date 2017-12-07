@@ -12,12 +12,12 @@ Table::Table() {
 
 Table::~Table() {
     for(int i = 0; i < numberOfCells; i++) {
-	std::cout << "Cell " << i << ":" << std::endl;
-	for(int k = 0; k < phaseSpaceDimensionality; k++) {
-	    std::cout << "Dim = " << k << std::endl;
-	    for(int j = 0; j < modelingTime; j++) {
-                std::cout << timeSeries[i][j].getVariable(k) << "\n";
-	    }
+        std::cout << "Cell " << i << ":" << std::endl;
+        for(int k = 0; k < phaseSpaceDimensionality; k++) {
+            std::cout << "Dim = " << k << std::endl;
+            for(int j = 0; j < modelingTime; j++) {
+                    std::cout << timeSeries[i][j].getVariable(k) << "\n";
+            }
         }
     }
 }
@@ -101,7 +101,7 @@ void Table::createTimeSeries(){
     timeSeries.resize(numberOfCells);
     for(int i = 0; i < numberOfCells; i++) {
         timeSeries[i].reserve(modelingTime);
-	for(int j = 0; j < modelingTime; j++) {
+        for(int j = 0; j < modelingTime; j++) {
             timeSeries[i].push_back(Variable(phaseSpaceDimensionality));
         }
     }
