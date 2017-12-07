@@ -10,14 +10,21 @@ Table::Table() {
     time = 0;
 }
 
+// Form a filename and print data to file
 Table::~Table() {
     for(int i = 0; i < numberOfCells; i++) {
-        std::cout << "Cell " << i << ":" << std::endl;
         for(int k = 0; k < phaseSpaceDimensionality; k++) {
-            std::cout << "Dim = " << k << std::endl;
+            std::string filename = "output";
+            filename = filename + std::to_string(i);
+            filename = filename + std::to_string(k);
+            filename = filename + ".txt";
+
+            std::ofstream output;
+            output.open(filename);
             for(int j = 0; j < modelingTime; j++) {
-                    std::cout << timeSeries[i][j].getVariable(k) << "\n";
+                    output << timeSeries[i][j].getVariable(k) << "\n";
             }
+            output.close();
         }
     }
 }
