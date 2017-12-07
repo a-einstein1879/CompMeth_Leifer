@@ -28,3 +28,7 @@ void Cell::addConnection(Cell *source, double weight) {
         std::cout << this << ": Source is " << connections[i].source << " weight is " << connections[i].weight << std::endl;
     }
 }
+
+double Cell::getVariable(int dim) {
+    return variable.getVariable(dim);
+}

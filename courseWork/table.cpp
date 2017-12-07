@@ -12,14 +12,13 @@ Table::Table() {
 
 Table::~Table() {
     for(int i = 0; i < numberOfCells; i++) {
-        for(int j = 0; j < modelingTime; j++) {
-            std::cout << "Time series(cell = " << i << ", time = " << j << ") = (";
-            for(int k = 0; k < phaseSpaceDimensionality; k++) {
-                std::cout << timeSeries[i][j].getVariable(k) << ", ";
-            }
-            std::cout << ")\t";
+	std::cout << "Cell " << i << ":" << std::endl;
+	for(int k = 0; k < phaseSpaceDimensionality; k++) {
+	    std::cout << "Dim = " << k << std::endl;
+	    for(int j = 0; j < modelingTime; j++) {
+                std::cout << timeSeries[i][j].getVariable(k) << "\n";
+	    }
         }
-	std::cout << "\n";
     }
 }
 
@@ -84,7 +83,7 @@ void Table::setupAdjacency() {
     int source, dest;
     double weight;
     while(1) {
-        std::getline(adjacency, line, '\t');
+        if(!std::getline(adjacency, line, '\t')) {break;}
         source = std::stoi(line);
         std::getline(adjacency, line, '\t');
         dest = std::stoi(line);
