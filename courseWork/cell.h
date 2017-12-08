@@ -10,6 +10,7 @@ public:
     void addConnection(Cell *source, double weight);
     void setPhaseSpaceDimensionality(int pphaseSpaceDimensionality);
     double getVariable(int dim);
+    void setVariable(int dim, double value);
 protected:
     int phaseSpaceDimensionality;
     int numberOfConnections;

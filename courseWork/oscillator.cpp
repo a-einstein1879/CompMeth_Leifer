@@ -5,7 +5,6 @@ Oscillator::Oscillator() {
 
 Oscillator::Oscillator(int pphaseSpaceDimensionality) {
     setPhaseSpaceDimensionality(pphaseSpaceDimensionality);
-    variable.setVariable(0, 1);
 }
 #include <iostream> 
 Variable Oscillator::solveEquation() {

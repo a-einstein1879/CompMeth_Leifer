@@ -32,3 +32,7 @@ void Cell::addConnection(Cell *source, double weight) {
 double Cell::getVariable(int dim) {
     return variable.getVariable(dim);
 }
+
+void Cell::setVariable(int dim, double value) {
+    variable.setVariable(dim, value);
+}

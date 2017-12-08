@@ -136,4 +136,5 @@ void Table::createOscillators() {
     for(int i = 0; i < numberOfCells; i++) {
         oscillators.push_back(Oscillator(phaseSpaceDimensionality));
     }
+    oscillators[0].setVariable(0, 1);
 }
