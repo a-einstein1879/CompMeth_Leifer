@@ -14,8 +14,8 @@ Variable Oscillator::solveEquation() {
     double xk, yk, xkp, ykp;
     yk = variable.getVariable(0);
     xk = variable.getVariable(1);
-    std::cout << this << std::endl;
-    std::cout << "x = " << xk << "; y = " << yk << std::endl;
+//    std::cout << this << std::endl;
+//    std::cout << "x = " << xk << "; y = " << yk << std::endl;
     double delta = getConnectionContribution();
     xkp = xk + h * yk;
     ykp = yk + h * delta;
@@ -28,7 +28,6 @@ Variable Oscillator::solveEquation() {
 double Oscillator::getConnectionContribution() {
     double total = 0;
     for(int i = 0; i < numberOfConnections; i++) {
-        std::cout << "Weight = " << connections[i].weight << "; x = " << connections[i].source->getVariable(1) << std::endl;
         total += connections[i].weight * connections[i].source->getVariable(1);
     }
     return total;
