@@ -95,7 +95,7 @@ void Table::setupAdjacency() {
         std::getline(adjacency, line, '\t');
         dest = std::stoi(line);
         if(!std::getline(adjacency, line, '\n')) {break;}
-        weight = std::stoi(line);
+        weight = std::stod(line);
         getCellById(dest)->addConnection(getCellById(source), weight);
     }
     
@@ -136,5 +136,5 @@ void Table::createOscillators() {
     for(int i = 0; i < numberOfCells; i++) {
         oscillators.push_back(Oscillator(phaseSpaceDimensionality));
     }
-    oscillators[0].setVariable(0, 1);
+    oscillators[0].setVariable(1, 1);
 }
