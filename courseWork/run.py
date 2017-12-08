@@ -41,7 +41,8 @@ for i in range(numberOfCells):
         
 x = np.linspace(1, modelingTime, modelingTime) #makes an evenly spaced array 50 values between 0 and 6
 for i in range(numberOfCells):
-    for j in range(phaseSpaceDimensionality):
+    for j in range(1, 2):
+#    for j in range(phaseSpaceDimensionality):
         ll = 'Cell = ' + str(i) + '; dim = ' + str(j)
         plt.plot(x, data[i, j, :], label = ll)
 plt.legend(loc='upper right')
