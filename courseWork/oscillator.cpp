@@ -18,7 +18,6 @@ Variable Oscillator::solveEquation() {
     xk = variable.getVariable(1);
 //    std::cout << this << std::endl;
 //    std::cout << "x = " << xk << "; y = " << yk << std::endl;
-    double delta = getConnectionContribution();
     
 // This is Runge-Kutta method
 
@@ -28,8 +27,8 @@ Variable Oscillator::solveEquation() {
     
 // This is Euler method, we want to compare it to 4th order Runge-Kutta and Leapfrog
     
-    xkp = xk + h * yk;
-    ykp = yk + h * delta;
+    xkp = xk + h * f();
+    ykp = yk + h * g();
     
 //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     var.setVariable(0, ykp);
@@ -37,7 +36,11 @@ Variable Oscillator::solveEquation() {
     return var;
 }
 
-double Oscillator::getConnectionContribution() {
+double Oscillator::f() {
+    return variable.getVariable(0);
+}
+
+double Oscillator::g() {
     double total = 0;
     for(int i = 0; i < numberOfConnections; i++) {
         total += connections[i].weight * connections[i].source->getVariable(1);

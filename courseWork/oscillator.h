@@ -8,8 +8,9 @@ public:
     Oscillator();
     Oscillator(int pphaseSpaceDimensionality);
 private:
+    double f();
+    double g();
     Variable solveEquation();
-    double getConnectionContribution();
 };
 
 #endif
