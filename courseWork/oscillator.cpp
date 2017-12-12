@@ -27,9 +27,9 @@ Variable Oscillator::solveEquation() {
      
     
 // This is Euler method, we want to compare it to 4th order Runge-Kutta and Leapfrog
-    /*
+    
     xkp = xk + h * yk;
-    ykp = yk + h * delta;*/
+    ykp = yk + h * delta;
     
 //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     var.setVariable(0, ykp);
