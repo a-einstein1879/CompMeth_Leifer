@@ -31,6 +31,9 @@ Table::~Table() {
 
 bool Table::tick() {
     for(int i = 0; i < numberOfCells; i++) {
+        for(int i = 0; i < 4; i++) {
+            getCellById(i)->calculateRungeK(i);
+        }
         Variable var(phaseSpaceDimensionality);
         var = getCellById(i)->tick();
         timeSeries[i].push_back(var);
@@ -67,6 +70,12 @@ void Table::readConfig() {
     std::getline(config, line, '\t');
     phaseSpaceDimensionality = std::stoi(line);
     std::getline(config, line, '\n');
+    
+    // reading h
+    std::getline(config, line, '\t');
+    std::getline(config, line, '\t');
+    h = std::stod(line);
+    std::getline(config, line, '\n');
     config.close();
     
     // Printing out configuration to make sure it's right
@@ -76,6 +85,7 @@ void Table::readConfig() {
     std::cout << "Cell type = "                     << cellType                 << std::endl;
     std::cout << "Modeling time = "                 << modelingTime             << std::endl;
     std::cout << "Phase space dimensionality = "    << phaseSpaceDimensionality << std::endl;
+    std::cout << "h = "                             << h                        << std::endl;
 }
 
 void Table::setupAdjacency() {
@@ -134,7 +144,7 @@ void Table::createOscillators() {
     std::cout << "Creating " << numberOfCells << " oscillators" << std::endl;
     oscillators.reserve(numberOfCells);
     for(int i = 0; i < numberOfCells; i++) {
-        oscillators.push_back(Oscillator(phaseSpaceDimensionality));
+        oscillators.push_back(Oscillator(phaseSpaceDimensionality, h));
     }
     oscillators[0].setVariable(1, 1);
 }

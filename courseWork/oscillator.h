@@ -6,7 +6,7 @@
 class Oscillator : public Cell {
 public:
     Oscillator();
-    Oscillator(int pphaseSpaceDimensionality);
+    Oscillator(int pphaseSpaceDimensionality, double H);
 private:
     double f();
     double g();

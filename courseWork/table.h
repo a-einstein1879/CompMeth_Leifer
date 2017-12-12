@@ -15,6 +15,7 @@ private:
     int numberOfCells;
     int time;
     int modelingTime;
+    double h;
     void readConfig();
     void setupAdjacency();
     

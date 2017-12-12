@@ -2,17 +2,18 @@
 #include <iostream>
 
 Oscillator::Oscillator() {
+    rungeK.resize(4);
 }
 
-Oscillator::Oscillator(int pphaseSpaceDimensionality) {
+Oscillator::Oscillator(int pphaseSpaceDimensionality, double H) {
     setPhaseSpaceDimensionality(pphaseSpaceDimensionality);
+    h = H;
 }
 
 /* In this function we can see that everything is hardcoded. When I wrote this function I meant
 that oscillator will always have 2 dimensions and all methods are for 2D problems */
 Variable Oscillator::solveEquation() {
     Variable var(phaseSpaceDimensionality);
-    double h = 0.01;
     double xk, yk, xkp, ykp;
     yk = variable.getVariable(0);
     xk = variable.getVariable(1);

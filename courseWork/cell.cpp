@@ -36,3 +36,7 @@ double Cell::getVariable(int dim) {
 void Cell::setVariable(int dim, double value) {
     variable.setVariable(dim, value);
 }
+
+void Cell::calculateRungeK(int order) {
+    double h = 0.01;
+}

@@ -2,6 +2,7 @@
 #define CELL_H
 
 #include "variable.h"
+#include <vector>
 
 class Cell {
 public:
@@ -11,6 +12,8 @@ public:
     void setPhaseSpaceDimensionality(int pphaseSpaceDimensionality);
     double getVariable(int dim);
     void setVariable(int dim, double value);
+// TODO: all Runge commit needs rework and extra thinking
+    void calculateRungeK(int order);
 protected:
     int phaseSpaceDimensionality;
     int numberOfConnections;
@@ -22,6 +25,10 @@ protected:
     
     Variable variable;
     virtual Variable solveEquation() = 0;
+    virtual double f() = 0;
+    virtual double g() = 0;
+    double h;
+    std::vector<double> rungeK;
 };
 
 #endif
