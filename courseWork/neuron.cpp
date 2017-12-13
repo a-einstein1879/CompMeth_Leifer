@@ -34,12 +34,12 @@ Variable Neuron::solveEquation() {
     //    std::cout << "x = " << xk << "; y = " << yk << std::endl;
     
     // This is Runge-Kutta method
-    // vkp = vk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
-    // ukp = uk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
+    vkp = vk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
+    ukp = uk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
     
     // This is Euler method, we want to compare it to 4th order Runge-Kutta and Leapfrog
-    vkp = vk + h * f();
-    ukp = uk + h * g();
+    // vkp = vk + h * f();
+    // ukp = uk + h * g();
     
     //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     
@@ -85,29 +85,29 @@ void Neuron::calculateRungeK(int order) {
     }
     
     if(order == 1) {
-        rungeK[1] = variable.getVariable(0) + 0.5 * h * rungeL[0];
-        double total = 0;
-        for(int i = 0; i < numberOfConnections; i++) {
-            total += connections[i].weight * ( connections[i].source->getVariable(1) + 0.5 * h * connections[i].source->getK(0));
-        }
-        rungeL[1] = total;
+        double uk, vk;
+        vk = variable.getVariable(0);
+        uk = variable.getVariable(1);
+        
+        rungeK[1] = k * (vk + 0.5 * h * rungeL[0] - vr) * (vk + 0.5 * h * rungeL[0] - vt) - uk - 0.5 * h * rungeK[0];
+        rungeL[1] = a * (b * (vk + 0.5 * h * rungeL[0] - vr) - uk - 0.5 * h * rungeK[0]);
     }
     
     if(order == 2) {
-        rungeK[2] = variable.getVariable(0) + 0.5 * h * rungeL[1];
-        double total = 0;
-        for(int i = 0; i < numberOfConnections; i++) {
-            total += connections[i].weight * ( connections[i].source->getVariable(1) + 0.5 * h * connections[i].source->getK(1));
-        }
-        rungeL[2] = total;
+        double uk, vk;
+        vk = variable.getVariable(0);
+        uk = variable.getVariable(1);
+        
+        rungeK[2] = k * (vk + 0.5 * h * rungeL[1] - vr) * (vk + 0.5 * h * rungeL[1] - vt) - uk - 0.5 * h * rungeK[1];
+        rungeL[2] = a * (b * (vk + 0.5 * h * rungeL[1] - vr) - uk - 0.5 * h * rungeK[1]);
     }
     
     if(order == 3) {
-        rungeK[3] = variable.getVariable(0) + h * rungeL[2];
-        double total = 0;
-        for(int i = 0; i < numberOfConnections; i++) {
-            total += connections[i].weight * ( connections[i].source->getVariable(1) + h * connections[i].source->getK(2));
-        }
-        rungeL[3] = total;
+        double uk, vk;
+        vk = variable.getVariable(0);
+        uk = variable.getVariable(1);
+        
+        rungeK[3] = k * (vk + h * rungeL[2] - vr) * (vk + h * rungeL[2] - vt) - uk - h * rungeK[2];
+        rungeL[3] = a * (b * (vk + h * rungeL[2] - vr) - uk - h * rungeK[2]);
     }
 }
