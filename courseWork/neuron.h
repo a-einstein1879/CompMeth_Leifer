@@ -11,6 +11,7 @@ private:
     double f();
     double g();
     Variable solveEquation();
+    void calculateRungeK(int order);
 };
 
 #endif

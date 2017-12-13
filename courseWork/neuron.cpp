@@ -29,12 +29,12 @@ Variable Neuron::solveEquation() {
     //    std::cout << "x = " << xk << "; y = " << yk << std::endl;
     
     // This is Runge-Kutta method
-    vkp = vk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
-    ukp = uk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
+    // vkp = vk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
+    // ukp = uk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
     
     // This is Euler method, we want to compare it to 4th order Runge-Kutta and Leapfrog
-    //    vkp = vk + h * f();
-    //    ukp = uk + h * g();
+    vkp = vk + h * f();
+    ukp = uk + h * g();
     
     //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     
@@ -80,4 +80,8 @@ double Neuron::g() {
     v = variable.getVariable(0);
     u = variable.getVariable(1);
     return a * (b * (v - vr) - u);
+}
+
+void Neuron::calculateRungeK(int order) {
+    
 }
