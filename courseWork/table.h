@@ -33,6 +33,8 @@ private:
     void createOscillators();
     
     // Neurons
+    std::vector<Neuron> neurons;
+    void createNeurons();
 };
 
 #endif

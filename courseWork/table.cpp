@@ -133,11 +133,17 @@ void Table::createCells() {
     if(cellType == 1) {
         createOscillators();
     }
+    if(cellType == 2) {
+        createNeurons();
+    }
 }
 
 Cell* Table::getCellById(int id) {
     if(cellType == 1) {
         return &oscillators[id];
+    }
+    if(cellType == 2) {
+        return &neurons[id];
     }
     std::cout << "Wrong scenario" << std::endl;
     return 0;
@@ -150,4 +156,13 @@ void Table::createOscillators() {
         oscillators.push_back(Oscillator(phaseSpaceDimensionality, h));
     }
     oscillators[0].setVariable(1, 1);
+}
+
+void Table::createNeurons() {
+    std::cout << "Creating " << numberOfCells << " neurons" << std::endl;
+    neurons.reserve(numberOfCells);
+    for(int i = 0; i < numberOfCells; i++) {
+        neurons.push_back(Neuron(phaseSpaceDimensionality, h));
+    }
+    neurons[0].setVariable(0, -60);
 }

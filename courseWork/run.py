@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # TODO: need to check if all outputs are 0 / success
-output = subprocess.call("g++ main.cpp table.cpp cell.cpp variable.cpp oscillator.cpp -o simulator -std=c++11", shell=True)
+output = subprocess.call("g++ main.cpp table.cpp cell.cpp variable.cpp oscillator.cpp neuron.cpp -o simulator -std=c++11", shell=True)
 print(output)
 output = subprocess.call("chmod 777 simulator", shell=True)
 print(output)
