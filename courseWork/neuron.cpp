@@ -12,15 +12,15 @@ Neuron::Neuron(int pphaseSpaceDimensionality, double H) {
     setPhaseSpaceDimensionality(pphaseSpaceDimensionality);
     h = H;
     
-    a = 1;
+    a = 0.7;
     b = 0.5;
-    c = -30;
-    d = 8;
+    c = -42;
+    d = 10;
     k = 0.5;
     vr = -60;
     vt = -50;
-    cm = 50;
-    noiseAmp = 10;
+    cm = 3;
+    noiseAmp = 8;
 }
 
 /* In this function we can see that everything is hardcoded. When I wrote this function I meant
@@ -34,12 +34,12 @@ Variable Neuron::solveEquation() {
     //    std::cout << "x = " << xk << "; y = " << yk << std::endl;
     
     // This is Runge-Kutta method
-    vkp = vk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
-    ukp = uk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
+    // vkp = vk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
+    // ukp = uk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
     
     // This is Euler method, we want to compare it to 4th order Runge-Kutta and Leapfrog
-    // vkp = vk + h * f();
-    // ukp = uk + h * g();
+    vkp = vk + h * f();
+    ukp = uk + h * g();
     
     //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     
@@ -47,7 +47,7 @@ Variable Neuron::solveEquation() {
     vkp = vkp - noiseAmp / 2 + rand()%noiseAmp;
     
     // Izhekevich cut off
-    if(vkp >= 1) {
+    if(vkp > 0) {
         vkp = c;
         ukp = uk + d;
     }
@@ -62,13 +62,12 @@ double Neuron::f() {
     v = variable.getVariable(0);
     u = variable.getVariable(1);
     //std::cout << (k * (v - vr) * (v - vt) - u) << std::endl;
-    return k * (v - vr) * (v - vt) - u;
-    //return (k*(neuronPotential[timer] - Vr)*(neuronPotential[timer] - Vt) - Um[timer] + Iex + synapticCurrent[timer])/Cm;
-    /*    double total = 0;
-     for(int i = 0; i < numberOfConnections; i++) {
-     total += connections[i].weight * connections[i].source->getVariable(1);
-     }
-     return total;*/
+    double total = 0;
+    for(int i = 0; i < numberOfConnections; i++) {
+        total += connections[i].weight * (connections[i].source->getVariable(0) - v);
+    }
+    
+    return k * (v - vr) * (v - vt) - u + total / cm;
 }
 
 double Neuron::g() {
