@@ -29,6 +29,9 @@ protected:
     virtual double g() = 0;
     double h;
     std::vector<double> rungeK;
+    std::vector<double> rungeL;
+    double getK(int order);
+    double getL(int order);
 };
 
 #endif

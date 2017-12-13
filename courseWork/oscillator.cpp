@@ -2,7 +2,6 @@
 #include <iostream>
 
 Oscillator::Oscillator() {
-    rungeK.resize(4);
 }
 
 Oscillator::Oscillator(int pphaseSpaceDimensionality, double H) {
@@ -21,15 +20,12 @@ Variable Oscillator::solveEquation() {
 //    std::cout << "x = " << xk << "; y = " << yk << std::endl;
     
 // This is Runge-Kutta method
-
-//    Variable k1(phaseSpaceDimensionality), k2(phaseSpaceDimensionality), k3(phaseSpaceDimensionality), k4(phaseSpaceDimensionality);
-//    k1.setVariable(0, h * yk);
-     
+    xkp = xk + h/6 * (getK(0) + 2 * getK(1) + 2 * getK(2) + getK(3));
+    ykp = yk + h/6 * (getL(0) + 2 * getL(1) + 2 * getL(2) + getL(3));
     
 // This is Euler method, we want to compare it to 4th order Runge-Kutta and Leapfrog
-    
-    xkp = xk + h * f();
-    ykp = yk + h * g();
+//    xkp = xk + h * f();
+//    ykp = yk + h * g();
     
 //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     var.setVariable(0, ykp);

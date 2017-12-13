@@ -30,10 +30,13 @@ Table::~Table() {
 }
 
 bool Table::tick() {
-    for(int i = 0; i < numberOfCells; i++) {
-        for(int i = 0; i < 4; i++) {
-            getCellById(i)->calculateRungeK(i);
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < numberOfCells; j++) {
+            getCellById(j)->calculateRungeK(i);
         }
+    }
+
+    for(int i = 0; i < numberOfCells; i++) {
         Variable var(phaseSpaceDimensionality);
         var = getCellById(i)->tick();
         timeSeries[i].push_back(var);

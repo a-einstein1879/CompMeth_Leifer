@@ -1,5 +1,5 @@
 numberOfCells	2	// number of cells
 cellType	1	// 1 - oscillator, 2 - neuron
-modelingTime	20000	// time period of modeling
+modelingTime	50000	// time period of modeling
 phaseSpaceDimensionality	2	// amount of variables for each cell
 h	0.01	// precision step
