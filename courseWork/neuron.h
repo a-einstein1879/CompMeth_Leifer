@@ -12,6 +12,10 @@ private:
     double g();
     Variable solveEquation();
     void calculateRungeK(int order);
+    double a, b, c, d;
+    int noiseAmp;
+    double k, vr, vt, cm;
+    
 };
 
 #endif

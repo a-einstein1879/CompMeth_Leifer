@@ -11,16 +11,21 @@ Neuron::Neuron(int pphaseSpaceDimensionality, double H) {
     srand(time(NULL));
     setPhaseSpaceDimensionality(pphaseSpaceDimensionality);
     h = H;
+    
+    a = 1;
+    b = 0.5;
+    c = -30;
+    d = 8;
+    k = 0.5;
+    vr = -60;
+    vt = -50;
+    cm = 50;
+    noiseAmp = 10;
 }
 
 /* In this function we can see that everything is hardcoded. When I wrote this function I meant
  that neuron will always have 2 dimensions and all methods are for 2D problems */
 Variable Neuron::solveEquation() {
-    double c, d;
-    c = -30;
-    d = 8;
-    int noise;
-    noise = 10;
     Variable var(phaseSpaceDimensionality);
     double vk, uk, vkp, ukp;
     vk = variable.getVariable(0);
@@ -39,7 +44,7 @@ Variable Neuron::solveEquation() {
     //    std::cout << "xp = " << xkp << "; yp = " << ykp << std::endl;
     
     // noise
-    vkp = vkp - noise / 2 + rand()%noise;
+    vkp = vkp - noiseAmp / 2 + rand()%noiseAmp;
     
     // Izhekevich cut off
     if(vkp >= 1) {
@@ -53,11 +58,6 @@ Variable Neuron::solveEquation() {
 }
 
 double Neuron::f() {
-    double k, vr, vt, cm;
-    k = 0.5;
-    vr = -60;
-    vt = -50;
-    cm = 50;
     double u, v;
     v = variable.getVariable(0);
     u = variable.getVariable(1);
@@ -72,10 +72,6 @@ double Neuron::f() {
 }
 
 double Neuron::g() {
-    double a, b, vr;
-    a = 1;
-    b = 0.5;
-    vr = -60;
     double u, v;
     v = variable.getVariable(0);
     u = variable.getVariable(1);
@@ -83,5 +79,35 @@ double Neuron::g() {
 }
 
 void Neuron::calculateRungeK(int order) {
+    if(order == 0) {
+        rungeK[0] = f();
+        rungeL[0] = g();
+    }
     
+    if(order == 1) {
+        rungeK[1] = variable.getVariable(0) + 0.5 * h * rungeL[0];
+        double total = 0;
+        for(int i = 0; i < numberOfConnections; i++) {
+            total += connections[i].weight * ( connections[i].source->getVariable(1) + 0.5 * h * connections[i].source->getK(0));
+        }
+        rungeL[1] = total;
+    }
+    
+    if(order == 2) {
+        rungeK[2] = variable.getVariable(0) + 0.5 * h * rungeL[1];
+        double total = 0;
+        for(int i = 0; i < numberOfConnections; i++) {
+            total += connections[i].weight * ( connections[i].source->getVariable(1) + 0.5 * h * connections[i].source->getK(1));
+        }
+        rungeL[2] = total;
+    }
+    
+    if(order == 3) {
+        rungeK[3] = variable.getVariable(0) + h * rungeL[2];
+        double total = 0;
+        for(int i = 0; i < numberOfConnections; i++) {
+            total += connections[i].weight * ( connections[i].source->getVariable(1) + h * connections[i].source->getK(2));
+        }
+        rungeL[3] = total;
+    }
 }
