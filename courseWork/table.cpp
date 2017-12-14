@@ -154,8 +154,9 @@ void Table::createOscillators() {
     oscillators.reserve(numberOfCells);
     for(int i = 0; i < numberOfCells; i++) {
         oscillators.push_back(Oscillator(phaseSpaceDimensionality, h));
+        oscillators[i].setVariable(1, 1);
     }
-    oscillators[0].setVariable(1, 1);
+    //oscillators[0].setVariable(1, 1);
 }
 
 void Table::createNeurons() {

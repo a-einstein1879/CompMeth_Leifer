@@ -14,7 +14,7 @@ private:
     void calculateRungeK(int order);
     double a, b, c, d;
     int noiseAmp;
-    double k, vr, vt, cm;
+    double k, vr, vt, vpeak, cm;
     
 };
 

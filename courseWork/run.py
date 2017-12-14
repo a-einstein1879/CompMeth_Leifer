@@ -38,12 +38,19 @@ for i in range(numberOfCells):
         for k in range(len(x) - 1):
             data[i][j][k] = x[k]
         dataFile.close()
-        
+
 x = np.linspace(1, modelingTime, modelingTime) #makes an evenly spaced array 50 values between 0 and 6
+f, axarr = plt.subplots(numberOfCells, phaseSpaceDimensionality)
 for i in range(numberOfCells):
-#    for j in range(1, 2):
     for j in range(phaseSpaceDimensionality):
+        axarr[i, j].plot(x, data[i, j, :])
         ll = 'Cell = ' + str(i) + '; dim = ' + str(j)
-        plt.plot(x, data[i, j, :], label = ll)
-plt.legend(loc='upper right')
-plt.show() #show the plot if using interactive mode (otherwise does nothing)
+        axarr[i, j].set_title(ll)
+plt.show()
+
+#for i in range(numberOfCells):
+#    for j in range(phaseSpaceDimensionality):
+#        ll = 'Cell = ' + str(i) + '; dim = ' + str(j)
+#        plt.plot(x, data[i, j, :], label = ll)
+#plt.legend(loc='upper right')
+#plt.show() #show the plot if using interactive mode (otherwise does nothing)

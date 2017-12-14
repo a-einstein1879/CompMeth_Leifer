@@ -19,8 +19,9 @@ Neuron::Neuron(int pphaseSpaceDimensionality, double H) {
     k = 0.5;
     vr = -60;
     vt = -50;
+    vpeak = 50;
     cm = 3;
-    noiseAmp = 8;
+    noiseAmp = 10;
 }
 
 /* In this function we can see that everything is hardcoded. When I wrote this function I meant
@@ -47,7 +48,7 @@ Variable Neuron::solveEquation() {
     vkp = vkp - noiseAmp / 2 + rand()%noiseAmp;
     
     // Izhekevich cut off
-    if(vkp > 0) {
+    if(vkp > vpeak) {
         vkp = c;
         ukp = uk + d;
     }
