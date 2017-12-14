@@ -163,6 +163,6 @@ void Table::createNeurons() {
     neurons.reserve(numberOfCells);
     for(int i = 0; i < numberOfCells; i++) {
         neurons.push_back(Neuron(phaseSpaceDimensionality, h));
+        neurons[i].setVariable(0, -60);
     }
-    neurons[0].setVariable(0, -60);
 }
